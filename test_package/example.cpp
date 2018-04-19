@@ -1,6 +1,8 @@
 #include <iostream>
-#include "hello.h"
+#include "Logger\Logger.h"
 
 int main() {
-    hello();
+	SLog::Logger l("Klasa");
+	l.dodajKlase("Test");
+	std::cout << l.napis().c_str();
 }
