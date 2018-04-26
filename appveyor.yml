@@ -6,12 +6,6 @@ environment:
 
     matrix:
         - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
-          CONAN_VISUAL_VERSIONS: 12
-          CONAN_BUILD_TYPES: Release
-        - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
-          CONAN_VISUAL_VERSIONS: 12
-          CONAN_BUILD_TYPES: Debug
-        - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
           CONAN_VISUAL_VERSIONS: 14
           CONAN_BUILD_TYPES: Release
         - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
@@ -31,7 +25,11 @@ install:
   - cmd: conan --version
 
 build_script:
-  - cmd: conan create . klusek_rules/stable
+  - cmd: conan source . --source-folder=src
+  - cmd: conan install . --install-folder=install
+  - cmd: conan build . --source-folder=src --install-folder=install --build-folder=build
+  - cmd: conan package . --source-folder=src --install-folder=install --build-folder=build --package-folder=package
+  - cmd: conan export-pkg . klusek_rules/stable --source-folder=src --install-folder=install --build-folder=build
 
 test_script:
   - cmd: conan test test_package logger/1.0@klusek_rules/stable
