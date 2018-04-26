@@ -1,9 +1,9 @@
 from conans import ConanFile, CMake
-
+import os
 
 class LoggerConan(ConanFile):
     name = "logger"
-    version = "1.0"
+    version = os.getenv("BUILD_VERSION", "1.0")
     license = "MIT"
     url = "https://github.com/klusekrules/Logger"
     description = "Simple base logger."
