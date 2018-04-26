@@ -31,7 +31,7 @@ install:
   - cmd: conan --version
 
 build_script:
-  - cmd: conan create klusek_rules/stable
+  - cmd: conan create . klusek_rules/stable
 
 test_script:
   - cmd: conan test test_package logger/1.0@klusek_rules/stable
