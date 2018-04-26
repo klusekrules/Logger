@@ -24,14 +24,14 @@ environment:
           CONAN_VISUAL_VERSIONS: 15
           CONAN_BUILD_TYPES: Debug
 
-    install:
-      - set PATH=%PATH%;%PYTHON%/Scripts/
-      - cmd: pip.exe install conan
-      - cmd: conan user # Create the conan data directory
-      - cmd: conan --version
+install:
+  - set PATH=%PATH%;%PYTHON%/Scripts/
+  - cmd: pip.exe install conan
+  - cmd: conan user # Create the conan data directory
+  - cmd: conan --version
 
-    build_script:
-      - cmd: conan create klusek_rules/stable
+build_script:
+  - cmd: conan create klusek_rules/stable
 
-    test_script:
-      - cmd: conan test test_package logger/1.0@klusek_rules/stable
+test_script:
+  - cmd: conan test test_package logger/1.0@klusek_rules/stable
