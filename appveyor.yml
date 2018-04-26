@@ -1,6 +1,29 @@
 version: 1.0.{build}
-    platform:
-      - x64
+environment:
+    PYTHON: "C:\\Python27"
+    PYTHON_VERSION: "2.7.8"
+    PYTHON_ARCH: "32"
+
+    matrix:
+        #- MINGW_CONFIGURATIONS: '4.9@x86_64@seh@posix, 4.9@x86_64@sjlj@posix, 4.9@x86@sjlj@posix, 4.9@x86@dwarf2@posix, 6@x86_64@seh@posix, 7@x86_64@seh@posix'
+        - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
+          CONAN_VISUAL_VERSIONS: 12
+          CONAN_BUILD_TYPES: Release
+        - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
+          CONAN_VISUAL_VERSIONS: 12
+          CONAN_BUILD_TYPES: Debug
+        - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
+          CONAN_VISUAL_VERSIONS: 14
+          CONAN_BUILD_TYPES: Release
+        - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
+          CONAN_VISUAL_VERSIONS: 14
+          CONAN_BUILD_TYPES: Debug
+        - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+          CONAN_VISUAL_VERSIONS: 15
+          CONAN_BUILD_TYPES: Release
+        - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+          CONAN_VISUAL_VERSIONS: 15
+          CONAN_BUILD_TYPES: Debug
 
     install:
       - cmmd: echo "Downloading conan..."
@@ -10,12 +33,7 @@ version: 1.0.{build}
       - cmmd: conan --version
 
     build_script:
-      - cmmd: mkdir build
-      - cmmd: conan install -o gtest:shared=True
-      - cmmd: cd build
-      - cmmd: cmake ../ -DBUILD_TEST=TRUE  -G "Visual Studio 14 2015 Win64"
-      - cmmd: cmake --build . --config Release
+      - cmmd: conan create klusek_rules/stable
 
     test_script:
-      - cmmd: cd bin
-      - cmmd: encryption_test.exe
+      - cmmd: conan test test_package logger/1.0@klusek_rules/stable
