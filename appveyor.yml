@@ -25,11 +25,11 @@ install:
   - cmd: conan --version
 
 build_script:
-  - cmd: conan source . --source-folder=src
+  - cmd: conan source . --source-folder=.
   - cmd: conan install . --install-folder=install
-  - cmd: conan build . --source-folder=src --install-folder=install --build-folder=build
-  - cmd: conan package . --source-folder=src --install-folder=install --build-folder=build --package-folder=package
-  - cmd: conan export-pkg . klusek_rules/stable --source-folder=src --install-folder=install --build-folder=build
+  - cmd: conan build . --source-folder=. --install-folder=install --build-folder=build
+  - cmd: conan package . --source-folder=. --install-folder=install --build-folder=build --package-folder=package
+  - cmd: conan export-pkg . klusek_rules/stable --source-folder=. --install-folder=install --build-folder=build
 
 test_script:
   - cmd: conan test test_package logger/1.0@klusek_rules/stable
