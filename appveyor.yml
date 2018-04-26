@@ -5,7 +5,6 @@ environment:
     PYTHON_ARCH: "32"
 
     matrix:
-        #- MINGW_CONFIGURATIONS: '4.9@x86_64@seh@posix, 4.9@x86_64@sjlj@posix, 4.9@x86@sjlj@posix, 4.9@x86@dwarf2@posix, 6@x86_64@seh@posix, 7@x86_64@seh@posix'
         - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
           CONAN_VISUAL_VERSIONS: 12
           CONAN_BUILD_TYPES: Release
@@ -26,8 +25,7 @@ environment:
           CONAN_BUILD_TYPES: Debug
 
     install:
-      - cmd: echo "Downloading conan..."
-      - cmd: set PATH=%PATH%;%PYTHON%/Scripts/
+      - set PATH=%PATH%;%PYTHON%/Scripts/
       - cmd: pip.exe install conan
       - cmd: conan user # Create the conan data directory
       - cmd: conan --version
