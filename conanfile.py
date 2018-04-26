@@ -3,7 +3,7 @@ import os
 
 class LoggerConan(ConanFile):
     name = "logger"
-    version = os.getenv("APPVEYOR_BUILD_VERSION ", "1.0")
+    version = os.getenv("APPVEYOR_BUILD_VERSION", "1.0")
     license = "MIT"
     url = "https://github.com/klusekrules/Logger"
     description = "Simple base logger."
