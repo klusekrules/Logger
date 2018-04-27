@@ -26,7 +26,13 @@ install:
   - conan user # It creates the conan data directory
 
 build_script:
-  - cmd: conan create . klusekrules/stable
- 
+  - conan source . --source-folder=tmp
+  - conan install . --install-folder=tmp
+  - conan build . --source-folder=tmp --install-folder=tmp --build-folder=tmp
+
 test_script:
-  - python build.py
+  - conan test test_package %CONAN_REFERENCE%@%CONAN_USERNAME%/%CONAN_CHANNEL%
+
+deploy_script:
+- cmd: >-
+    python build.py
