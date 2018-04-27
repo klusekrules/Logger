@@ -34,6 +34,12 @@ test_script:
   - conan export-pkg . %CONAN_USERNAME%/%CONAN_CHANNEL% --source-folder=tmp --install-folder=tmp --build-folder=tmp
   - conan test test_package %CONAN_REFERENCE%@%CONAN_USERNAME%/%CONAN_CHANNEL%
 
-deploy_script:
-- cmd: >-
-    python build.py
+deploy:
+- provider: BinTray
+  username: klusekrules
+  api_key:
+    secure: bSN0ztvyA1B1/qUbKQjTFG9IUI3YcVH0uDZ6CGTgYuhauiAG0VeBl9l2LkE3P3H/
+  subject: klusekrules
+  repo: https://api.bintray.com/conan/klusekrules/stable
+  package: logger
+  publish: true
