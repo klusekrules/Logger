@@ -21,6 +21,7 @@ environment:
 install:
   - set PATH=%PATH%;%PYTHON%/Scripts/
   - set CONAN_REFERENCE=logger/%APPVEYOR_BUILD_VERSION%
+  - set
   - pip.exe install conan --upgrade
   - pip.exe install conan_package_tools
   - conan user # It creates the conan data directory
@@ -34,12 +35,6 @@ test_script:
   - conan export-pkg . %CONAN_USERNAME%/%CONAN_CHANNEL% --source-folder=tmp --install-folder=tmp --build-folder=tmp
   - conan test test_package %CONAN_REFERENCE%@%CONAN_USERNAME%/%CONAN_CHANNEL%
 
-deploy:
-- provider: BinTray
-  username: klusekrules
-  api_key:
-    secure: bSN0ztvyA1B1/qUbKQjTFG9IUI3YcVH0uDZ6CGTgYuhauiAG0VeBl9l2LkE3P3H/
-  subject: klusekrules
-  repo: https://api.bintray.com/conan/klusekrules/stable
-  package: logger
-  publish: true
+deploy_script:
+- cmd: >-
+    python build.py
