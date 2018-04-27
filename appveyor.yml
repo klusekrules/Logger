@@ -37,4 +37,4 @@ test_script:
 
 deploy_script:
 - cmd: >-
-    IF %APPVEYOR_REPO_BRANCH% NEQ release (python build.py) ELSE (Echo Not release branch)
+    IF %APPVEYOR_REPO_BRANCH% EQU release (python build.py) ELSE (Echo Not release branch)
