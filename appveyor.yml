@@ -4,7 +4,8 @@ environment:
     PYTHON_VERSION: "2.7.8"
     PYTHON_ARCH: "32"
 
-    CONAN_REFERENCE: "logger/0.1"
+    PROJECT_NAME: "logger"
+    RELEASE_BRANCH: "release"
     CONAN_USERNAME: "klusekrules"
     CONAN_LOGIN_USERNAME: "klusekrules"
     CONAN_CHANNEL: "stable"
@@ -20,7 +21,7 @@ environment:
 
 install:
   - set PATH=%PATH%;%PYTHON%/Scripts/
-  - set CONAN_REFERENCE=logger/%APPVEYOR_BUILD_VERSION%
+  - set CONAN_REFERENCE=%PROJECT_NAME%/%APPVEYOR_BUILD_VERSION%
   - set
   - pip.exe install conan --upgrade
   - pip.exe install conan_package_tools
@@ -37,4 +38,4 @@ test_script:
 
 deploy_script:
 - cmd: >-
-    IF %APPVEYOR_REPO_BRANCH% EQU release (python build.py) ELSE (Echo Not release branch)
+    IF %APPVEYOR_REPO_BRANCH% EQU %RELEASE_BRANCH% (python build.py) ELSE (Echo Deploy is canceled, not release branch selected)
